@@ -10,3 +10,11 @@ server.listen(port, () => {
 app.get('/',(req,res) =>{
     res.sendFile(__dirname + '/public/index.html');
 });
+
+io.on('connection', (socket) =>{
+    console.log('user connected');
+    socket.emit('message', { jakub: 'Are you there ?'});
+    socket.on('testEvent',(data)=>{
+        console.log(data);
+    });
+});
