@@ -1,0 +1,29 @@
+{
+  "name": "nodechat",
+  "version": "1.0.0",
+  "description": "simple nodejs chat app using socketIo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JK-Biesek/NodeJsChat.git"
+  },
+  "author": "Jakub",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JK-Biesek/NodeJsChat/issues"
+  },
+  "homepage": "https://github.com/JK-Biesek/NodeJsChat#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "nodemon": "^1.17.5",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1"
+  }
+}
