@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Socket.io Chat</title>
     <style>
         form { padding: 20px; position: fixed; width: 100%; bottom: 10px;}
         #msg {list-style-type: none; margin: 0;width: 90%;}
@@ -43,7 +43,9 @@
             $('#message').val('');
             return false;
         });
-        
+        socket.on('connect', () => {
+            socket.emit('msg', 'user connected');
+        });
         socket.on('msg', (message) => {
             $('#msg').append($('<li>').text(message));     
         });
