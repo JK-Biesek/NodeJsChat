@@ -37,11 +37,16 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
    <script src="/socket.io/socket.io.js"></script>
    <script>
-       const socket = io.connect('http://localhost:3000');
-       socket.on('message',(data)=>{
-           console.log(data);
-           socket.emit('testEvent', {userOne : 'Yes I am here :)'});
-       });
+       const socket = io();
+        $('form').submit(()=>{
+            socket.emit('msg',$('#message').val());
+            $('#message').val('');
+            return false;
+        });
+        
+        socket.on('msg', (message) => {
+            $('#msg').append($('<li>').text(message));     
+        });
    </script> 
 </body>
 </html>
