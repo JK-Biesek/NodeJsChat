@@ -11,12 +11,14 @@ app.get('/',(req,res) =>{
     res.sendFile(__dirname + '/public/index.html');
 });
 
-io.on('connection', (socket) =>{
+var nodeSpace = io.of('/nodeJs');
+
+nodeSpace.on('connection', (socket) =>{
     socket.on('msg',(message)=>{
         console.log(`message is ${message}`);
-        io.emit('msg',message);
+        nodeSpace.emit('msg',message);
     });
     socket.on('disconnect', () => {
-        io.emit('msg','user disconnected');
+        nodeSpace.emit('msg','user disconnected');
     });
 });
