@@ -37,14 +37,19 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
    <script src="/socket.io/socket.io.js"></script>
    <script>
+       var php_room = 'php';
        const socket = io('/nodeJs');
-        $('form').submit(()=>{
-            socket.emit('msg',$('#message').val());
+        $('form').submit(()=> {
+            let info = $('#message').val();
+            socket.emit('msg',{ info, room});
             $('#message').val('');
             return false;
         });
         socket.on('connect', () => {
             socket.emit('msg', 'user connected');
+        });
+        socket.on('connect', () => {
+        socket.emit('join',{room: php_room});
         });
         socket.on('msg', (message) => {
             $('#msg').append($('<li>').text(message));     

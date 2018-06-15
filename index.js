@@ -14,9 +14,13 @@ app.get('/',(req,res) =>{
 var nodeSpace = io.of('/nodeJs');
 
 nodeSpace.on('connection', (socket) =>{
-    socket.on('msg',(message)=>{
-        console.log(`message is ${message}`);
-        nodeSpace.emit('msg',message);
+    socket.on('join',(data)=>{
+        socket.join(data.room);
+        nodeSpace.in(data.room).emit('message',`New user just joined to the room : ${data.room}`);
+    });
+    socket.on('msg',(data)=>{
+        console.log(`message is ${data.message}`);
+        nodeSpace.in(data.room).emit('msg',data.message);
     });
     socket.on('disconnect', () => {
         nodeSpace.emit('msg','user disconnected');
