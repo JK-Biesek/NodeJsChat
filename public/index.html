@@ -37,23 +37,30 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
    <script src="/socket.io/socket.io.js"></script>
    <script>
-       var php_room = 'php';
+       var room = 'php';
+       const space= {
+           room : "php"
+       }
        const socket = io('/nodeJs');
-        $('form').submit(()=> {
-            let info = $('#message').val();
-            socket.emit('msg',{ info, room});
+
+socket.on('connect', () => {
+        socket.emit('join',space.room);
+        });
+
+             $('form').submit(()=> {
+       let msg = $('#message').val();
+            socket.emit('msg1',{ msg, space});
             $('#message').val('');
             return false;
         });
-        socket.on('connect', () => {
-            socket.emit('msg', 'user connected');
+
+        socket.on('room', (msg) => {
+            $('#msg').append($('<li>').text(msg));     
         });
-        socket.on('connect', () => {
-        socket.emit('join',{room: php_room});
+        socket.on('messageInput', (msg) => {
+            $('#msg').append($('<li>').text(msg));     
         });
-        socket.on('msg', (message) => {
-            $('#msg').append($('<li>').text(message));     
-        });
+        
    </script> 
 </body>
 </html>

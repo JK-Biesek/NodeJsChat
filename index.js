@@ -15,14 +15,14 @@ var nodeSpace = io.of('/nodeJs');
 
 nodeSpace.on('connection', (socket) =>{
     socket.on('join',(data)=>{
-        socket.join(data.room);
-        nodeSpace.in(data.room).emit('message',`New user just joined to the room : ${data.room}`);
+        socket.join(data);
+        nodeSpace.in(data).emit('room',`New user just joined to the room : ${data}`);
     });
-    socket.on('msg',(data)=>{
-        console.log(`message is ${data.message}`);
-        nodeSpace.in(data.room).emit('msg',data.message);
+    socket.on('msg1',(data)=>{
+        console.log(`message is ${data.msg}`);
+        nodeSpace.in(data.space.room).emit('messageInput',data.msg);
     });
     socket.on('disconnect', () => {
-        nodeSpace.emit('msg','user disconnected');
+        nodeSpace.emit('messageInput','user disconnected');
     });
 });
