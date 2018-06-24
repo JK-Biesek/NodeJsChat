@@ -35,3 +35,4 @@ nodeSpace.on('connection', (socket) => {
         nodeSpace.emit('messageInput', 'user disconnected');
     });
 });
+module.exports = app;
